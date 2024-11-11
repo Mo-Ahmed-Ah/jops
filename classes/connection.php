@@ -1,11 +1,18 @@
 <?php
-    define("HOST", "localhost");
+
+    define("STS", "mysql:host=localhost;dbname=jobs");
     define("USER_NAME", "root");
     define("PASS", "");
-    define("DB", "jops");
-    class Connection{
-        function connect(){
-            $conn = new PDO("mysql:host=HOST;dbname=DB", USER_NAME, PASS);
-            
+
+    class Connection {
+        private $conn;
+        private function connect() {
+            try {
+                $this->conn = new PDO(STS, USER_NAME, PASS);
+            } catch (Exception $e) {
+                
+                echo 'Connection failed : ' . $e->getMessage();
+            }
         }
     }
+    
